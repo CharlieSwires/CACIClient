@@ -58,7 +58,7 @@ public class CACIClient {
 
 	}
 
-	public RetrieveOrdersBean retrieveAllOrders (int i){
+	public RetrieveOrdersBean retrieveAllOrders (){
 		ClientConfig config = new DefaultClientConfig();//.register(JacksonFeature.class);
 		//config.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING, Boolean.TRUE);
 		Client client = Client.create(config);
@@ -69,7 +69,7 @@ public class CACIClient {
 		service = service.uri(uriBuilder.build());
 		
 		// Now call the REST service
-		ClientResponse response = service.type(MIME_TYPE).accept(MIME_TYPE).post(ClientResponse.class, "{\"dummy\":"+i+"}");
+		ClientResponse response = service.type(MIME_TYPE).accept(MIME_TYPE).get(ClientResponse.class);
 
 		// Get the data
 		RetrieveOrdersBean bean = response.getEntity(RetrieveOrdersBean.class);

@@ -29,7 +29,7 @@ public class Test1 {
 		assertTrue("Bricks don't match",lodgedOrder[0].getBricks() == 1000 &&
 				lodgedOrder[1].getBricks() == 2000);
 		
-		RetrieveOrdersBean orders = client.retrieveAllOrders(1);
+		RetrieveOrdersBean orders = client.retrieveAllOrders();
 		List<RetrieveOrderBean> ordersList = orders.getBeans();
 		
 		int i = 0;
