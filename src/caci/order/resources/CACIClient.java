@@ -36,25 +36,25 @@ public class CACIClient {
 		return bean;
 
 	}
-	public RetrieveOrderBean retrieveOrder (int orderNum){
-		ClientConfig config = new DefaultClientConfig();//.register(JacksonFeature.class);
-		//config.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING, Boolean.TRUE);
-		Client client = Client.create(config);
-		WebResource service = client.resource(getBaseURI());
+	public RetrieveOrderBean retrieveOrder (int orderNum)
+	{
+	    ClientConfig config = new DefaultClientConfig();//.register(JacksonFeature.class);
+	    //config.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING, Boolean.TRUE);
+	    Client client = Client.create(config);
+	    WebResource service = client.resource(getBaseURI());
 
-		//Build URI in its entirety
-		UriBuilder uriBuilder = service.getUriBuilder().path("rest").path("OrderService").path("retrieveOrder");
-		service = service.uri(uriBuilder.build());
-		
-		String input = "{\"orderNum\":"+orderNum+"}";
-		// Now call the REST service
-		ClientResponse response = service.type(MIME_TYPE).accept(MIME_TYPE).post(ClientResponse.class,input);
+	    //Build URI in its entirety
+	    UriBuilder uriBuilder = service.getUriBuilder().path("rest").path("OrderService").path("retrieveOrder").path(String.valueOf(orderNum));
+	    service = service.uri(uriBuilder.build());
+	        
+	    // Now call the REST service
+	    ClientResponse response = service.accept(MIME_TYPE).get(ClientResponse.class);
 
-		// Get the data
-		RetrieveOrderBean bean = response.getEntity(RetrieveOrderBean.class);
+	    // Get the data
+	    RetrieveOrderBean bean = response.getEntity(RetrieveOrderBean.class);
 
 
-		return bean;
+	    return bean;
 
 	}
 
@@ -69,7 +69,7 @@ public class CACIClient {
 		service = service.uri(uriBuilder.build());
 		
 		// Now call the REST service
-		ClientResponse response = service.type(MIME_TYPE).accept(MIME_TYPE).get(ClientResponse.class);
+		ClientResponse response = service.accept(MIME_TYPE).get(ClientResponse.class);
 
 		// Get the data
 		RetrieveOrdersBean bean = response.getEntity(RetrieveOrdersBean.class);
